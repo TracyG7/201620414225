@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验5.1</title>
+<style type="text/css">
+	.l{
+		margin-bottom: 20px;/*每一行*/
+	}
+	.t{
+		float: right;
+		margin-left:90px;/*span浮右*/
+	}
+	
+	.main{
+		width: 500px;
+	
+		margin: 20px auto;
+	}
+	
+	</style>
+</head>
+
+<body>
+	
+	<form class="main" action="t51.php" method="post" >
+	<div >
+	<label for="username">输入用户名</label>
+	<input type="text" name="username" style="padding:5px">
+	</div>
+	<hr/>
+	<div>
+		
+	<p>请选择灯泡：</p>
+     <div class="l">
+       <input type="checkbox" name="lights[]" value="1">4个100瓦灯泡			 
+	<span class="t">￥2.00</span>
+		</div>
+		
+		<div class="l">
+		<input type="checkbox" name="lights[]" value="2">8个100瓦灯泡
+		
+		<span class="t">￥4.00</span>
+		</div>
+		<div class="l">
+				<input type="checkbox" name="lights[]" value="3">4个100瓦节能灯泡
+			<span class="t">￥3.00</span>
+		</div>
+			<div class="l">
+		<input type="checkbox" name="lights[]" value="4">8个100瓦节能灯泡
+			
+		<span class="t">￥6.00</span>
+	    </div>
+ 		</div>
+	<hr/>
+	<p>请选择付款方式:</p>
+	<div style="margin-bottom: 20px">
+ 	<input type="radio" name="pay" value="Visa">Visa
+	<input type="radio" name="pay" value="MasterCard">MasterCard
+	<input type="radio" name="pay" value="银联">银联	
+	</div>
+	<input type="submit" name="submit" value="提交订单">
+	<input type="reset" name="reset" value="重置">
+
+	</form>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>	
+<meta charset="utf-8">
+<title>实验9.2</title>
+<style type="text/css">
+		.main{
+			width: 400px;
+			margin: 0 auto;
+		}
+		.m{
+			margin: 10px;
+		}
+		.b{
+			width: 300px;
+			 text-align: center;
+		}
+		.s{/*检测中*/
+			color: blue;
+		}
+		.s1{/*用户名不可以使用*/
+			color: red;
+		}
+		.s2{/*用户名可以使用*/
+			color: green;
+		}
+	.show{/*显示出来*/
+		border: 1px black solid;
+	}
+	</style>
+
+	<script type="text/javascript" >
+	  window.onload=function(){
+		  document.getElementById('user').onblur=ValidateUser;
+		  document.getElementById('b1').onclick=SubmitForm;
+	  }
+	  //检测
+		function ValidateUser(){
+			document.getElementById('span').innerHTML="检测中.."
+			document.getElementById('span').className="s";
+			var xhr=new XMLHttpRequest();//请求
+			xhr.onreadystatechange=function(){receiveMsg(xhr);};//方法
+			var user=document.getElementById('user').value;
+			xhr.open("GET","t91.php?user="+user,true);//打开php
+			xhr.send();//发送
+		}
+		
+		function receiveMsg(xhr){
+			if(xhr.readyState==4 && xhr.status==200){
+				if(xhr.responseText !=0){//用户名可以使用
+					document.getElementById('span').innerHTML="用户名可以使用";
+			document.getElementById('span').className="s2";
+				}
+				else{//用户名不可以使用
+					document.getElementById('span').innerHTML="用户名不可以使用";
+			document.getElementById('span').className="s1";
+				}
+				
+			}
+		}
+		//表格
+		function SubmitForm(){
+			var xhr=new XMLHttpRequest();//请求
+			
+			xhr.onload=function(){//方法
+				if(xhr.status==200){
+					
+		
+					document.getElementById('show').innerHTML=xhr.responseText;
+					
+				}
+			};
+			//获取表格数据
+			var form=document.getElementById('form');
+			var data=new FormData(form);
+			xhr.open("POST","t92.php",true);//打开php
+			xhr.send(data);//发送
+			
+		}	
+	</script>
+	
+</head>
+<body>
+<form class="main" id="form"  action="#" method="post">
+	<div class="m">
+	<label>姓名：</label>
+	<input name="user" id="user" type="text" >
+	<span id="span"></span>
+	</div>
+		<div class="m">
+			<label>性别：</label>
+	<select name="sex">
+		<option value="man">男</option>
+		<option value="woman">女</option>
+		</select>
+	</div>
+		<div class="m">
+		<label>密码：</label>
+		<input name="ps" type="text">
+		
+		</div>
+	<div class="b">
+	<input type="button" id="b1" value="注册">	
+	</div>
+	</form>
+	<div  class="show" id="show"></div>
+</body>
+</html>

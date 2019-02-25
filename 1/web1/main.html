@@ -1,0 +1,508 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	
+	<style type="text/css">
+		/*img{border-radius: 100%;
+		    width: 100px;
+			height: 100px;
+			overflow: hidden;
+		}*/
+		.main{
+			margin: 0 auto;
+			width: 1000px;
+		}
+		.left{
+			margin-right: 50px;
+			width: 200px;
+			height: 700px;
+			background-color:moccasin;
+			float: left;
+			text-align: center;
+		}
+		.leftimg{
+			   width: 100px;
+			   height: 100px;
+			   border-radius: 100%;/*图片变圆*/
+	
+			  
+		}
+		
+		.footer{
+			width: 1000px;
+			height: 60px;
+			line-height: 60px;
+			background-color:yellowgreen;
+			text-align: center;
+		}
+		#fm{
+			margin:0;
+			padding:10px 30px;
+		}
+		.ftitle{
+			font-size:14px;
+			font-weight:bold;
+			padding:5px 0;
+			margin-bottom:10px;
+			border-bottom:1px solid #ccc;
+		}
+		.fitem{
+			margin-bottom:5px;
+		}
+		.fitem label{
+			display:inline-block;
+			width:80px;
+		}
+		.fitem input{
+			width:160px;
+		}
+		a:link{
+			color: #112B7F;
+			font-weight: bold;
+		}
+		a:visited{
+			color: #112B7F;
+			font-weight: bold;
+		}
+		.change{
+			cursor:pointer;
+		}
+		.change:hover{
+			 color: blue;
+		}
+		#alter{
+			height:305px;
+			 width: 500px;
+		     line-height: 50px;
+			text-align: center;
+			background-image: url(background.jpg);
+			color: red;
+			font-weight: bolder;
+			margin-left: 300px;
+			
+		}
+		#alter input[type="button"]{
+			 font-size: 20px;
+			margin-right: 50px;
+		}
+		
+	</style>
+	
+<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+
+	
+
+
+	<script type="text/javascript">
+	
+	     var username;
+		var schoolsno;
+		 
+		
+	 $(function(){
+		$.ajax({
+			 url:"adminresign.php",
+			 type:"POST",
+			 data:{s:3},
+			   async:false,//同步：意思是当有返回值以后才会进行后面的js程序。
+			dataType:"json",
+			success:function(result){
+				alert(result);
+				 if(result==0){
+					 
+					window.location.href="index.html";
+				 
+				 }
+				else{
+					
+					username=result.username;
+				
+					$("#Susername").text("用户名："+result.username);
+					$("#Schoolname").text("学校："+result.schoolname);
+					schoolsno=result.schoolsno;
+					$("#friendlink").text("友情链接："+result.schoolname);
+					$("#friendlink").attr("href",result.schoollink);
+						findpicture();
+				}
+			}
+			 
+		});
+		
+	 });
+		function newUser(){
+			$("#dlg").dialog('open').dialog('setTitle','添加');
+			$('#fm').form('clear');
+			$("#_easyui_textbox_input1").blur(function(){
+			var i=$("#_easyui_textbox_input1").val();
+			$.ajax({
+				url:"selectbook.php",
+				dataType:"json",
+				data:{i:i,a:1},
+				type:"POST",
+			    async:false,
+				success:function(result){
+					if(result==0){
+						alert("学校已有此书,不能添加");
+						$("#_easyui_textbox_input1").val("");
+						
+					}
+					else{
+						
+						$("#_easyui_textbox_input2").val(result.bookname);
+					$("input[name='bookname']").val(result.bookname);
+					$("#_easyui_textbox_input3").val(result.price);
+					$("input[name='price']").val(result.price);
+					}
+				}
+			});
+		});
+		
+		$("#_easyui_textbox_input2").blur(function(){
+			var i=$("#_easyui_textbox_input2").val();
+			$.ajax({
+				url:"selectbook.php",
+				dataType:"json",
+				data:{i:i,a:2},
+				type:"POST",
+			async:false,//
+				success:function(result){
+					if(result==0){
+						alert("学校已有此书,不能添加");
+						$("#_easyui_textbox_input2").val("");
+						
+					}
+					else{
+						$("#_easyui_textbox_input1").val(result.ISBN);
+					$("input[name='ISBN']").val(result.ISBN);
+					$("#_easyui_textbox_input3").val(result.price);
+					$("input[name='price']").val(result.price);
+					}
+				}
+			});
+		});
+			
+		}//要放在里面才可以blur
+			
+			
+			 function findpicture(){
+			url="http://201620414225-webload.stor.sinaapp.com/administratorusername"+username+".jpg";
+
+			 $.ajax({
+				 type:"GET",
+				 async:false,
+				 url:url,
+				  data:"",
+				 success:function(data){
+					 
+						 
+						 $("#findimg").attr("src",url);
+					 
+				 },
+				
+						  error:function(){
+							  $("#findimg").attr("src","头像.jpg");
+						  }
+				
+					 
+				
+		 
+				
+					
+			 });
+						 
+					 }
+			
+			
+			
+			
+			//url = 'save_user.php';
+		
+		
+		function saveUser(){
+			
+			$('#fm').form('submit',{
+				url:"savebook.php",
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					var result = eval('('+result+')');
+					if (result.errorMsg){
+						$.messager.show({
+							title: 'Error',
+							msg: result.errorMsg
+						});
+					} else {
+						$('#dlg').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');	// reload the user data
+					}
+				}
+			});
+		}
+		function editUser(){
+			var row = $('#dg').datagrid('getSelected');
+			if (row){
+				$('#ddlg').dialog('open').dialog('setTitle','只可修改书本数量');
+			$('#ffm').form('load',row);
+			}
+		}
+		function savebook(){
+			$('#ffm').form('submit',{
+				url:"updatebook.php",
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					var result = eval('('+result+')');
+					if (result.errorMsg){
+						$.messager.show({
+							title: 'Error',
+							msg: result.errorMsg
+						});
+					} else {
+						$('#ddlg').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');	// reload the user data
+					}
+				}
+			});
+		}
+		function destroyUser(){
+			var row = $('#dg').datagrid('getSelected');
+			if (row){
+				$.messager.confirm('Confirm','贵学校要删除此书?',function(r){
+					if (r){
+						$.post('destroybook.php',{ISBN:row.ISBN},function(result){
+							if (result.success){
+								$('#dg').datagrid('reload');	// reload the user data
+							} else {
+								$.messager.show({	// show error message
+									title: 'Error',
+									msg: result.errorMsg
+								});
+							}
+						},'json');
+					}
+				});
+			}
+		}
+			function updatepassword(){
+			   $("#table").hide();
+			$("#alter").show();
+			
+		}
+		function submitp(){
+			
+			if($("#firstpassword").val()==$("#secondpassword").val()){
+				var password=$("#firstpassword").val();
+				$.ajax({
+					url:"alterpassword.php",
+					type:"POST",
+					data:{username:username,password:$("#firstpassword").val()},
+					success:function(result){
+						  alert("修改成功");
+			 				$("#firstpassword").val("");
+			          $("#secondpassword").val("");
+					}
+				});
+				
+				
+			}
+			else{
+				alert("修改密码失败，请重新输入");
+					$("#firstpassword").val("");
+			$("#secondpassword").val("");
+			}
+		}
+		function mainpage(){
+			$("#alter").hide();
+			$("#table").show();
+			 
+		}
+		function updateimg(){
+			$("#win").window('open');
+		}
+	/*$("#ok").click(function(){
+			    $.ajax({
+					url:"img.php",
+					data:$('#formimg').serialize(),
+					type:"POST",
+					success:function(data){
+						alert(data);
+					}
+				});
+		});*/
+		function ok(){
+			var formData=new FormData();
+			formData.append('file',$("#file")[0].files[0]);
+			alert(formData);
+			
+			 $.ajax({
+					url:"img.php",
+					data:formData,//一定要双引号1111111
+					type:"POST",
+				    async:false,
+				 processData:false,
+				 contentType :false, 
+					success:function(result){
+						if(result==0){
+							alert("图像超过2MB或者上传的文件不是图像，请重新上传");
+						}
+						else{
+							alert("修改成功");
+							findpicture();//不能直接修改
+							
+						}
+					
+		 }
+				});
+		}
+		function changepic(fileDOM){
+		  if(window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    } 
+	
+			var file=fileDOM.files[0];
+					 var imageType = /^image\//;
+    //是否是图片
+    if(!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+			reader.onload=function(e){
+				 var img=document.getElementById("preview");
+				 img.src=e.target.result;
+			};
+			reader.readAsDataURL(file);
+			
+		}
+	</script>	
+		
+</head>
+
+<body>
+
+	 <div id="win" class="easyui-window" title="更改图像" closed="true" style="width:400px;height:400px" >
+		<form  id="formimg" style="padding:10px 20px 10px 40px;"  enctype="multipart/form-data">
+			<p>上传图片 <input type="file" id="file" name="file" onChange="
+				changepic(this)"></p>
+			 <p>图片预览</p>
+			<img id="preview"  class="leftimg "  src="预览.jpg" alt="图片预览">
+			<div style="padding:10px;text-align:center;">
+			
+				<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="ok()">Ok</a>
+				<a href="#" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+			</div>
+		</form>
+	</div>
+		 <div class="main">
+		<div class="left">
+			<img  class="leftimg change" src="#" alt="" id="findimg" title="更改头像" onclick="updateimg()" >
+			<p  id="Susername">用户名</p>
+			<p id="Schoolname">学校名</p>
+			<p class="change" onclick="mainpage()">主页面</p>
+			<p class="change" onclick="updatepassword()"   >修改密码</p>
+			
+		
+		</div>
+	<div>
+		<div class="right">
+			<div id="table">
+			<table id="dg" title="学校书本管理系统" class="easyui-datagrid" style="width:700px;height:600px"
+			url="bookshow.php"
+			toolbar="#toolbar" pagination="true"
+			rownumbers="true" fitColumns="true" singleSelect="true">
+		<thead>
+			<tr>
+				<th field="ISBN" width="50">ISBN</th>
+				<th field="bookname" width="50">书名</th>
+				<th field="price" width="50">价格</th>
+				<th field="booknumber" width="50">数量</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="toolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">增加</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">修改</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
+	</div>
+	
+	<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+			closed="true" buttons="#dlg-buttons">
+		<div class="ftitle">Book Information</div>
+		<form id="fm" method="post" novalidate>
+			<div class="fitem">
+				<label>ISBN</label>
+				<input   name="ISBN"     id="ISBN"      class="easyui-textbox" >
+			</div>
+			<div class="fitem">
+				<label>书名</label>
+				<input   name="bookname"  class="easyui-textbox" >
+			</div>
+			<div class="fitem">
+				<label>价格</label>
+				<input name="price" class="easyui-textbox" >
+			</div>
+			<div class="fitem">
+				<label>数量</label>
+				<input   name="booknumber" class="easyui-textbox" required="true">
+			</div>
+			
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+	</div>	
+	<div id="ddlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+			closed="true" buttons="#ddlg-buttons">
+		<div class="ftitle">Book Information</div>
+		<form id="ffm" method="post" novalidate>
+			<div class="fitem">
+				<label>ISBN</label>
+				<input   name="ISBN"           class="easyui-textbox" >
+			</div>
+			<div class="fitem">
+				<label>数量</label>
+				<input   name="booknumber" class="easyui-textbox" required="true">
+			</div>
+			
+		</form>
+	</div>	
+	<div id="ddlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="savebook()" style="width:90px">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#ddlg').dialog('close')" style="width:90px">取消</a>
+	</div>
+				
+	</div>
+			 <div id="alter" style="display: none">
+				<p>
+				<lable for="alterpassword">修改密码：</lable> 
+				<input type="password"  autocomplete="off"   id="firstpassword">
+				</p>
+				 <p>
+				<lable for="alterpassword">再次确认修改密码：</lable> 
+				<input type="password"  autocomplete="off"   id="secondpassword">
+				</p>
+				<div class="password">
+					<input type="button" id="submitpassword"  onClick="submitp()"    value="确认修改">
+					<input type="button" id="deletepassword" onClick="deletep()"    value="取消"><!--id与函数名字不能一样，否则不能出效果-->
+				</div>
+			</div>
+	<div class="footer">
+		<a  href="#"  id="friendlink"  >友情链接</a>
+     </div>
+		 </div>
+	</div>
+	</div>
+	
+</body>
+</html>

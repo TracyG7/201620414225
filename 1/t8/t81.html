@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验8.1</title>
+<style type="text/css">
+	.main{
+		width: 400px;
+		margin: 0 auto;
+	}
+	 table,th,td
+	{
+		border:1px black solid;
+		border-collapse:separate;
+	}
+	table{
+		width: 500px;/*表格的单元大小*/
+		text-align: center;
+       
+       
+	}
+	.even{
+		background-color: yellow;
+	}/*必须在first前面，否则后面的没有效果，因为首先是偶全局然后是细节*/
+	.first{
+		background-color: green;
+				 color: blue;
+		 
+
+		}
+	
+	.mouseover{
+             color: red;
+		   font-weight: bold;
+	}
+	
+	
+	
+	
+	
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" >
+	$(function(){
+		//属性
+	$('#b1').click(function(){
+		
+	$('tr:even').css('background-color',"yellow");//偶数行
+	$('tr:first-child').css({'background-color':"green",'color':"blue"});//这个在偶数行后面才生效
+  $('tr').bind({
+	  mouseover:function(){
+	  $(this).css({
+		 'color':"red",
+		  'font-weight':"bold"//字体大小		  
+	  });
+  },
+ mouseout:function(){
+		 $(this).css({
+		 'color':"black",
+			 'font-weight':"normal"
+	  });
+	}			
+				
+		
+			   });
+	});
+		//类样式
+		$('#b2').click(function(){
+			
+			$('tr:even').addClass("even");//添加css类
+			$('tr:first-child').addClass("first");
+			$('tr').bind({mouseover:function(){
+				$(this).toggleClass('mouseover');//添加或者移除
+			},
+			mouseout:function(){$(this).toggleClass('mouseover');}//注意不能有分号
+			
+						 });
+			
+			
+			
+			
+		});
+	
+	});
+	
+	
+	
+	
+	</script>
+</head>
+
+<body >
+	<div class="main">
+	<table>
+	<caption>汽车销售</caption>
+	<tr>
+		<th >商品名称</th>
+		<th >单位</th>
+		<th >零售价格</th>
+	</tr>
+	
+		<tr>
+	<td>奥迪A6</td>	
+	<td>万元/辆</td>	
+	<td>30.8</td>	
+	</tr>
+		<tr>
+	<td>别克君威</td>	
+	<td>万元/辆</td>	
+	<td>17.8</td>	
+	</tr>
+	<tr>
+	<td>尼桑天籁</td>	
+	<td>万元/辆</td>	
+	<td>18.8</td>	
+	</tr>
+		<tr>
+	<td>马自达6</td>	
+	<td>万元/辆</td>	
+	<td>16.8</td>	
+	</tr>
+		<tr>
+	<td>马自达3</td>	
+	<td>万元/辆</td>	
+	<td>14.8</td>	
+	</tr>
+	</table>
+	<input type="button" id="b1" value="使用CSS属性设置">	
+		<input type="button"   id="b2" value="使用CSS类样式设置">	
+	</div>
+	
+</body>
+</html>

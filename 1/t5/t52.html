@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验5.2</title>
+	<style type="text/css">
+		.main{
+			width: 500px;
+			margin: 20px auto;
+		}
+		.d{
+			margin-bottom: 20px;
+		}
+		.l{
+			display: inline-block;
+			width: 100px;
+		}
+		.l1{
+			padding: 5px;
+		}
+		.c{
+			margin-right: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="main">
+	 <h1>请输入用户名</h1>
+		<form action="t52.php" method="post">
+		<div class="d">
+		<span class="l">用户名： </span>	
+			<input class="l1" type="text" name="username" >
+		</div>
+		<div class="d">
+		<span class="l">密码： </span>	
+			<input class="l1" type="text" name="password" >
+		</div>
+			<div class="d">
+				<span class="c"></span>
+			<input  type="checkbox" name="remember" value="true">记住我一周
+		</div>
+			<div class="d">
+				<span class="c"></span>
+			<input  type="submit" name="submit" value="登录">
+		</div>
+			
+		
+		</form>
+	</div>
+</body>
+</html>

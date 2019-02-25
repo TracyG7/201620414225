@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验2.2</title>
+	<style type="text/css">
+		.main{ margin:0 auto;
+		     width: 510px;
+	         padding: 10px;/*内边距*/
+		     margin-left: 30px;/*左侧边距*/
+	         border-style:solid;}
+		.center{
+			text-align:center;
+		}
+		
+		h1{
+			font-family:"黑体";
+			
+			}
+	  .t{
+	        color: gray;
+		    font-style: italic;/*字体为斜体*/
+			
+			}
+	  
+	.content{
+		    
+		    font-weight: bold;/*字体加粗*/
+			margin:0;/*去除边距*/
+            line-height: 3;/*行距3倍*/
+			text-indent:2em;/*首行缩进2字符*/
+		    
+			}
+
+	
+	</style>
+</head>
+
+<body>
+<div class="main">
+  <div class="center"><img src="http://201620414225.applinzi.com/moon.jpg"   alt="加载"/></div>
+  <h1 class="center"> 水调歌头·明月几时有</h1>
+  <p class="center">[宋]苏轼</p>
+  <p class="center t">丙辰中秋，欢饮达旦，大醉，作此篇。兼怀子由。</p><!-- 向一个标签加入多个类 先center 再t-->
+  <div>
+	<p class="content">明月几时有，把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去。惟恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。</p>
+   <p class="content">转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。</p>
+	 
+	</div>
+  <hr>
+ <div class="center"><img src="http://201620414225.applinzi.com/next2.jpg" alt="加载"/></div>
+  
+  
+ <h1 class="center"> 念奴娇·赤壁怀古</h1>
+  <p class="center">[宋]苏轼</p>
+  <p class="center t">丙辰中秋，欢饮达旦，大醉，作此篇。兼怀子由。</p>
+  <div>
+  <p class="content">大江东去，浪淘尽，千古风流人物。故垒西边，人道是，三国周郎赤壁。乱石穿空，惊涛拍岸，卷起千堆雪。江山如画，一时多少豪杰。</p>
+  <p class="content">遥想公瑾当年，小乔初嫁了，雄姿英发。羽扇纶巾，谈笑间，樯橹灰飞烟灭。故国神游，多情应笑我，早生华发。人生如梦，一尊还酹江月。</p>
+	</div>
+  
+ </div>
+
+</body>
+</html>

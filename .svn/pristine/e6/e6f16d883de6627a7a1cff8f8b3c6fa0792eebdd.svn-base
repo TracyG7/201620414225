@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验5.3</title>
+	<style type="text/css">
+		.main{
+			width: 700px;
+			margin: 20px auto;
+			padding:10px;
+			border: 1px red solid;
+			text-align: center;
+		}
+		.d{
+			margin:20px;
+			
+		}
+		.l{
+	          display: inline-block;
+			  margin-right: 10px;
+			  width: 100px;
+			  font-size: 20px;
+		}
+		.d input{
+			  padding-left: 10px;
+			  border-radius: 5px;
+			box-shadow: 2px 2px 2px 2px #EAEAEA inset;
+			height: 30px;
+			width: 300px;
+			  font-size: 15px;
+		}
+		table{
+			margin: 10px auto;
+			border-collapse: collapse;
+			width: 600px;
+			
+		}
+		th{
+			background-color: yellow;
+			color: red;
+			border: 1px black solid;
+			
+		}
+		td{
+			border: 1px black solid;
+		}
+	
+	
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		var j=0;
+	$(function(){
+		$('#b1').click(function(){
+			$.ajax({
+				url:"t103.php",
+				type:"POST",
+				data:$('#form').serialize(),//通过序列化表单值
+				dataType:"json",
+				success:ShowData,
+				error:function(){alert('error');}//属性提示错误
+			});
+		});
+	});
+		function ShowData(data){
+			var table=$('#table');
+			$('#table tr:not(:first)').remove();//去掉表格其他行，除第一行标题行 
+			if(data.ret==0){//当学号的长度不为12的时候
+	            
+					var tr=$("<tr></tr>").appendTo(table);
+					$("<td></td>").appendTo(tr).html(data.sno);//学号
+					$("<td></td>").appendTo(tr).html(data.name);//姓名
+					$("<td></td>").appendTo(tr).html(data.title);//题目
+					$("<td></td>").appendTo(tr).html(data.state);//状态
+					$("<td></td>").appendTo(tr).html(data.time);//时间
+					$("<td></td>").appendTo(tr).html(data.partner);//合作伙伴
+				
+			}
+			else{
+				alert(data.msg);//学号的长度不为12
+			}
+		}
+		
+	
+	</script>
+</head>
+ 
+<body>
+	
+	<div class="main">
+		<form method="post" id="form" action="#">
+		<h1>课程设计题目统计系统</h1>
+      <div class="d">
+		<label for="sno" class="l">学生学号：</label>
+		<input type="text" name="sno" required="required" placeholder="请输入12位学号" maxlength="12" oninvalid="setCustomValidity('请输入正确的12位学号')" >
+		</div>
+		 <div class="d">
+		<label for="name" class="l">学生姓名：</label>
+		<input type="text" name="name" required="required" placeholder="姓名" maxlength="5">
+		</div>
+		 <div class="d">
+		<label for="psw" class="l">修改密码：</label>
+		<input type="text" name="psw" required="required" placeholder="首次输入作为后面修改的密码" maxlength="10">
+		</div>
+		 <div class="d">
+		<label for="title" class="l">你的题目：</label>
+		<input type="text" name="title" required="required" placeholder="按照课程设计题目要求"  >
+		</div>
+		<div class="d">
+		<label for="partner" class="l">合作学生：</label>
+		<input type="text" name="partner"  placeholder="姓名，没有就空，只负责不同方面"  >
+		</div>
+		<div>
+		<input type="radio" name="action" value="add">添加题目
+		<span>&nbsp;</span>
+		<input type="radio" name="action" value="modify">修改题目
+		</div>
+		<div style="margin-top: 25px;">
+		<input type="button"  style="font-size: 20px"  id="b1"  value="提交操作">	
+		</div>
+		<div style="margin-top: 25px;">
+		<a href="#">显示全部学生题目</a>
+		</div>	
+	</form>
+		<table id="table">
+		<tr>
+	
+			<th>学号</th>	
+			<th>姓名</th>	
+			<th>题目</th>	
+			<th>状态</th>	
+			<th>录入时间</th>
+			<th>合作学生</th>
+		</tr>
+		</table>
+	</div>
+	
+</body>
+</html>

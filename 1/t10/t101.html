@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验10.1</title>
+	<style type="text/css">
+		.main{
+			width: 400px;
+		     margin: 0 auto;
+			
+		}
+		.m{
+			margin: 20px;
+		}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" >
+	$(function(){
+		$('#provinces').bind('change',function(){
+			var p=$('#provinces').val();
+		
+	    $.ajax({
+			
+			url:"t101.php",//php
+			type:"POST",//方式
+			data:{provinces:p},//输入php的name值:provinces,p赋值给provinces
+			dataType:"json",
+			success:show//成功的话进入这个函数
+		});
+	});
+	});
+	
+		function show(result){
+			//result访问的是php返回的data的key键
+			$('#area').html(result.area);
+		
+			$('#population').html(result.population);
+			$('#cities').empty();//先清除
+			for(var i of result.cities){
+				$("<option></option>").html(i).appendTo($("#cities"));//在id=cities结尾插入内容：
+			}
+		}
+	
+	</script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="m">
+	<span>请选择省份</span>
+	<select id="provinces">
+	<option>-请选择省份-</option>
+		<option value="gd">广东</option>
+		<option value="hn">湖南</option>
+		<option value="gx">广西</option>
+		<option value="ah">安徽</option>
+</select>
+	<span>城市</span><!--不能用lable-->
+	<select id="cities">
+	<option>-请选择城市-</option>
+</select>
+			</div>
+	<div class="m">
+	<span>总面积：</span>
+	<span id="area"></span>
+	</div>
+	<div class="m">
+	<span>总人口：</span>
+		<span id="population"></span>
+	</div>
+		</div>
+</body>
+</html>
+

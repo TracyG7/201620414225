@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验2.3</title>
+	<style type="text/css">
+		#main{
+			margin:20px auto;
+			border: 4px solid black;
+			width: 700px;
+			font-size: 12px;
+			line-height:50px;
+		}/*总体布局*/
+		span.right{
+			text-align: right;
+			width: 200px;
+			display: inline-block;/*margin-left: 100px;*/
+		}/*标签里的文字*/
+		.txt{
+			width: 180px;
+			line-height: 25px;
+			border-radius: 4px;/*添加圆角边框*/
+			margin-right: 20px;
+		    padding: 5px;
+			box-shadow: 2px 2px 2px 0 #EAEAEA inset；/*文本框添加阴影*/
+		         
+		    
+		}/*文本框*/
+		.tt{
+			line-height: 100px;
+		}
+		.txt:hover{
+		background: pink;/*当鼠标点击文本框的时候，背景颜色改变*/
+		}
+		
+		
+		.tip{
+		      color:#C5C0C1;
+			line-height: 20px; 
+		}
+		.yellowtip{
+			background: #F8EDC6;
+			display: inline-block;
+			position: relative;/*相对位置*/
+			vertical-align: middle;/*垂直居中对齐*/
+			width: 150px;
+			line-height:20px;
+			border: 1px #4F4A4A solid;
+			
+		}
+		.grid{
+			display: inline-block;
+			border:1px #646161 solid;
+			padding: 4px;
+			margin-right: 20px;
+			line-height: 20px;
+			
+		}
+		.btn{
+			background-image:url(new_btn.png);/*获取图片的路径*/
+			background-position: -410px 0px;/*获取图片的位置*/
+			width: 153px;/*图片的宽度*/
+			height: 52px;/*图片的高度*/
+			cursor: pointer;/*鼠标变手型*/
+		}
+		.btn:hover{
+			background-image:url(new_btn.png);/*获取图片的路径*/
+			background-position: -565px 0px;/*获取图片的位置*/
+			width: 157px;/*图片的宽度*/
+			height: 52px;/*图片的高度*/
+			cursor: pointer;/*鼠标变手型*/
+		}
+		
+		span.i{
+			color: red;
+			
+		}
+		select{
+			width：80;
+		}
+		.picture{
+			
+		      margin:20px;/*使按钮与上文有间隔*/
+		}
+	
+	
+	</style>
+</head>
+       
+<body>
+	<div id="main">
+	<form  action="t41.php" method="get">
+		<div>
+		     <label for="phone"><span class="right"><span class="i"><sup>*</sup></span> 我的手机号码：</span></label>
+			 <input  class="txt"  name="phonenumber" type="text" id="phone" autofocus="autofocus" placeholder="输入手机" pattern="^1[3-9]\d{9}$" required="required" oninvalid="setCustomValidity('请输入1开头的11位手机号')"><!--输入框-->
+			 <input type="button" value="免费获取验证码">
+		</div>
+		<div class="tip">
+			<span class="right">&nbsp;</span>
+			<span>完成注册后，手机号码为你的微博登录号。</span><!--不能用right类-->
+		</div>
+		<div>
+			
+		     <label for="creatpassword"><span class="right"><span class="i"><sup>*</sup></span> 创建密码：</span></label><!--为了右边有间距-->
+			 <input  class="txt" name="password" type="text" id="creatpassword" ><!--输入框-->
+			 <span class="yellowtip">为了你的账户安全，请使用与其他网络不同的密码。</span>
+		</div>
+		<div>
+		     <label for="n"><span class="right"><span class="i"><sup>*</sup></span> 昵称：</span></label>
+			 <input  class="txt" name="name" type="text" id="n"  required="required"   placeholder="输入昵称"><!--输入框-->
+		</div>
+		<div>
+		     <label for="g"><span class="right"><span class="i"><sup>*</sup></span> 性别：</span></label>
+			 <input name="gender" type="radio" id="man" value="男"  checked>
+			<!--输入框-->
+			<label for="man">男</label>
+			<input name="gender" type="radio" id="woman" value="女">
+			<!--输入框-->
+			<label for="woman">女</label>
+		</div>
+		<div>
+		<label for="place"><span class="right"><span class="i"><sup>*</sup></span> 所在地：</span></label>
+			<div class="grid">
+			      <select>
+				<option>北京市</option>
+			    <option>上海市</option>
+				<option>广州市</option>
+				<option>深圳市</option>	  
+				</select>
+			</div>
+			<div class="grid">
+			      <select>
+				<option>海淀区</option>
+			    <option>东城区</option>
+				<option>越秀区</option>
+				<option>海珠区</option>
+			    <option>福田区</option>	
+				</select>
+			</div>
+		
+		</div>
+		<div>
+		     <label for="pp"><span class="right"><span class="i"><sup>*</sup></span> 手机验证码：</span></label>
+			 <input class="txt"  name="code" type="text" id="pp"  ><!--输入框-->
+		</div>
+		<div class="picture">
+              <span class="right">&nbsp;</span>
+			 <input type="submit"    class="btn" id="button" value><!--没有value值，图片会有“提交”的字体出现-->
+		</div>
+		</form>
+	</div>
+</body>
+</html>

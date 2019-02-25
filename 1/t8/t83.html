@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验8.3</title>
+	<style type="text/css">
+		.text{
+			width: 200px;
+			margin-bottom: 20px;
+		}
+		.b{
+			margin-bottom: 20px;
+		}
+		
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" >
+	$(function(){
+		$('#text2').bind('focus',myFunc);
+		$('#checkbox1').click(myFunc1);
+		$('#checkbox2').click(myFunc2);
+	});
+		function myFunc(){
+			$('#text2').val($('#text1').val());
+		}
+		function myFunc1(){
+		$('#text3').toggle();//非常灵活的两态控制
+		if($('#checkbox1').prop("checked") == false){//获取属性值
+			$('#s1').html("显示第三个文本框");
+		}
+		else{
+			$('#s1').html("隐藏第三个文本框");
+		}
+		
+	    }
+		function myFunc2(){
+			if($('#checkbox2').prop("checked")==false){
+				$('#text1').css('width',"200px")
+			$('#s2').html("变长第一个文本框");
+		}
+		else{
+			$('#text1').css('width',"400px")
+			$('#s2').html("变短第一个文本框");
+		}
+		}
+		
+	
+	
+	
+	
+	</script>
+	
+</head>
+
+<body>
+	<input class="text" type="text"  id="text1">
+	<br/>
+	<input class="text" type="text"   id="text2">
+	<br/>
+	<input class="b" type="checkbox" id="checkbox1"><span id="s1">隐藏第三个文本框</span>
+	<br/>
+	<input class="b" type="checkbox"  id="checkbox2"><span id="s2">变长第一个文本框</span>
+	<br/>
+	<input class="text" type="text" id="text3" value="我是第三个文本框" >
+</body>
+</html>

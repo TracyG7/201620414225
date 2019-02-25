@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验9.3</title>
+	<style type="text/css">
+		.main{
+			width: 500px;
+			margin: 0 auto;
+			padding: 10px;
+			border: 3px black double;
+		}
+		
+		#float{
+			background-color: beige;
+		    
+			display: none;/*初始不能显示*/
+			position: absolute;
+		   
+			width: 100px;
+		 
+			font-size: 18px;
+			border: 3px black double;
+			
+			
+		}
+		#float ul {
+			
+			 list-style: none;/*删除前面的图标*/
+			
+		}
+		#float ul li{
+	
+			
+			 height: 30px;
+			 line-height: 30px;/*居中显示*/
+			border-bottom: 1px black solid;
+		     
+		}
+		#float ul li:hover{
+			background-color: aqua;
+		}
+		
+	</style>
+	
+	<script type="text/javascript" >
+	function PoPMenu(event){
+		if(event.button==2){//判断是否鼠标右击
+             var obj=document.getElementById('float');
+			obj.style.left=(event.clientX-40)+"px";
+			obj.style.top=(event.clientY-40)+"px";
+			obj.style.display="block";//float显示出来
+		}
+	}
+		//添加
+		function add(){
+			var city=prompt("请输入城市","");
+			if(city!=null&& city!=""){
+			var obj=document.getElementById('cities');
+			var newLi=document.createElement('li');//新建一个元素
+			var text=document.createTextNode(city);//创建一个文本节点:
+				newLi.appendChild(text);//将这个文本绩点放在元素里面
+				obj.appendChild(newLi);//将元素放在ul里面
+			}
+			
+		}
+		//删除
+		function dele(){
+			var city=prompt("请输入城市","");
+			
+			if(city!=null&& city!=""){
+			var obj=document.getElementById('cities');
+			for (var i of obj.children){
+				if(i.innerHTML==city){//如果存在，那么删除
+					obj.removeChild(i);
+					break;
+				}
+			}
+			}
+			
+		}
+		//修改
+		function up(){
+			var city=prompt("请输入要修改的城市","","");
+			var city1=prompt("请输入修改后的城市","");
+			if(city!=null&& city!=""){//判断要修改的城市是否为空
+			var obj=document.getElementById('cities');
+				if(city1!=null&&city1!=""){//判断修改后的城市是否为空
+			for (var i of obj.children){
+				if(i.innerHTML==city ){
+					i.innerHTML=city1;
+					break;
+				}
+			}
+			}
+			
+		}
+		}
+		//查询
+		function se(){
+			var city=prompt("请输入要查找的城市","","");
+			if(city!=null&& city!=""){
+			var obj=document.getElementById('cities');
+				
+			for (var i of obj.children){
+				if(i.innerHTML==city ){
+					//城市存在，改变样式
+					i.style.color="red";
+					alert("查找成功");
+					//退出for循环
+					break;
+				}
+				
+			
+			
+			
+		}
+			}
+		}
+	</script>
+	
+</head>
+
+<body oncontextmenu="return false;" ><!--禁止右键-->
+	<div class="main" onMouseDown="PoPMenu(event);">
+		<p>城市列表:</p>
+		
+			<ul id="cities">
+			<li>广州</li>
+				<li>深圳</li>
+				<li>珠海</li>
+			</ul>
+		
+	<div id="float" onMouseDown="this.style.display='block'"  onMouseMove="this.style.display='block'" onMouseOut="this.style.display='none'"><!--三种情况：按下，移动，移除：不显示-->
+		<ul >
+		<li onClick="add()">添加</li>
+		<li onClick="dele()">删除</li>
+		<li onClick="up()">修改</li>
+		<li onClick="se()">查询</li>	
+		</ul>
+	
+	</div>
+		</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验3.2</title>
+	<style type="text/css">
+		#main{
+	        width:650px;
+			margin: 0 auto;
+			font-size: 14px;
+			font-family: "Arial","微软雅黑";
+			
+		}
+		.top{
+			height: 20px;
+			line-height: 20px;
+			text-align: center;
+			background: #C0B5B6;
+		}/*灰色栏*/
+		.new-item{
+			padding:18px 0 20px 0px;
+			border-bottom: 1px grey solid;/*显示下框横线*/
+			position:relative;
+		}
+		.clearfix{
+			zoom:1;
+		}/*为消除浮动而准备*/
+	  .clearfix:after { 
+		   clear:both;  
+		  content:"."; 
+		  display:block; 
+		  height:0;
+		  visibility:hidden;
+		}
+		.left{
+			float: left;
+		}
+		.dimage{
+			
+			 width: 213px;
+			 height: 142px;
+			
+			margin-right: 17px;
+		
+		}/*图片样式*/
+		.dimage img{
+			width: 213px;
+			 height: 142px;
+		}/*控制图片大小*/
+		
+		.typeh2{
+			font-size: 19px;
+			color: black;
+			font-weight: bold;
+			margin:0;
+			
+		}/*新闻标题样式*/
+		a{
+			text-decoration: none;
+		}
+		.t1{
+			margin-top: 10px;
+		}
+		/*使图片和文字在同一行*/
+		.timag{
+			vertical-align:middle;
+			
+		}
+		.s1{
+			line-height: 30px;
+			color: #333;
+		}
+		
+		
+		
+		.bottom{
+			bottom: 20px;/*离底端的距离*/
+			
+			position: absolute;/*图片和上面的为相对位置，自己为绝对位置*/
+			left: 230px;/*div 图片所占的位置*/
+			right: 2px;
+			display: inline;/*可在同一行*/
+		    /*绝对位置一定要有（x，y）的坐标*/
+		}
+		
+		.time{
+			font-size: 13px;
+			color: #555;
+			float:left;
+			
+			
+		}
+		.remark{
+			 float: right;
+			
+	          
+		}
+		.remark a{
+			text-decoration: none;
+			font-size: 13px;
+			color: #333;
+		}
+		.remark span{
+			padding-left: 20px;
+			 font-size: 13px;
+			color: #333;
+		}
+		.remark span:hover{
+			
+			color: #6677cc;
+		}/*当鼠标悬浮在“分享”文字中*/
+	
+	</style>
+</head>
+	
+
+<body>
+	<div id="main">
+		<div class="top">有11条消息,点击查看</div>
+		<div class="new-item clearfix">
+		<div class="left dimage">
+		<img src="b0.jpg" alt="加载中">
+		</div>
+		<div>
+		  <a href="http://www.zhku.edu.cn/"><h2 class="typeh2" >共享单车的大迁徙：资本、梦想和不知疲倦的人</h2></a>
+		</div>
+		<div class="t1">
+			
+		    <img class="timag" src="小图标.png" alt="加载中">
+			<span class="s1">互联网</span>
+	    </div>
+		
+		<div class="bottom clearfix">
+			<div class="time">16分钟前</div>
+			<div class="remark">
+			    <a href="#">评论</a>
+				<span>分享</span>
+			</div>
+			
+			</div>
+	  	
+	</div>
+				<div class="new-item clearfix">
+		<div class="left dimage">
+		<img src="b1.jpg" alt="加载中">
+		</div>
+		<div>
+		  <a href="http://www.zhku.edu.cn/"><h2 class="typeh2" >共享单车火了而共享汽车却被吐槽 背后逻辑发人深思</h2></a>
+		</div>
+		<div class="t1">
+			
+		    <img class="timag" src="小图标.png"  alt="加载中">
+			<span class="s1">互联网</span>
+	    </div>
+	    
+	
+		<div class="bottom clearfix">
+			<div class="time">23分钟前</div>
+			<div class="remark">
+			    <a href="#">评论</a>
+				<span>分享</span>
+			</div>
+			
+			</div>
+		
+	</div>
+	<div class="new-item clearfix">
+		<div class="left dimage">
+		<img src="b2.jpg" alt="加载中">
+		</div>
+		<div>
+		  <a href="http://www.zhku.edu.cn/"><h2 class="typeh2" >iPhone 7频丢数据 苹果店员称每天好几例</h2></a>
+		</div>
+		<div class="t1">
+			
+		    <img class="timag" src="小图标.png"  alt="加载中">
+			<span class="s1">电信</span>
+	    </div>
+		
+		<div class="bottom clearfix">
+			<div class="time">25分钟前</div>
+			<div class="remark">
+			    <a href="#">评论</a>
+				<span>分享</span>
+			</div>
+			
+			
+	 	
+	</div>
+		</div>
+	</div>
+</body>
+</html>

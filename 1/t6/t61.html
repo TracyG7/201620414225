@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验6.1</title>
+<script type="text/javascript">
+var w=["web","javascript","css","html","php","jquery","xhtml","ajax","dom"];
+w=w.sort();
+document.write("<div>");
+
+
+for( var i in w){
+	 if(i%3!=0||i==0){
+		 document.write(w[i]+",");//三个输出
+	}
+	else{
+		document.write(w[i]+",<br/>");
+		}
+}
+var w1=w;
+for( var i in w1){
+	 w1[i]=w[i].toUpperCase();//不可以数组都用toUpperCase()
+}
+document.write("</div>");
+document.write("<div>");
+document.write(w1.sort(function(a,b){ return b.localeCompare(a)}));//升序 ，如果a.b则是降序
+document.write("</div>");
+</script>
+</head>
+
+<body>
+</body>
+</html>

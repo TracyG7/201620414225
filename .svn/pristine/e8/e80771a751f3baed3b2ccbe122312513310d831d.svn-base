@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实验6.2</title>
+<script type="text/javascript">
+     function dis_prompt(){
+		 var answer=prompt("请输入计算公式","1+2");//弹出提示框
+		 //记录运算符号的所在的字符串的位置
+ if((index=answer.indexOf("+"))!=-1){//如果是-1，就是检索不到
+	
+		   var num1=(Number)(answer.substring(0,index));//[0,index)，得出来的是字符串，将其改为数字
+		     
+		   var num2=(Number)(answer.substring(index+1));
+		   result=num1+"+"+num2+"="+(num1+num2);
+		 }
+		  else if((index=answer.indexOf("-"))!=-1){
+	
+		   var num1=(Number)(answer.substring(0,index));//[0,index)，得出来的是字符串，将其改为数字
+		     
+		   var num2=(Number)(answer.substring(index+1));
+		   result=num1+"-"+num2+"="+(num1-num2);
+		 }
+		  else if((index=answer.indexOf("*"))!=-1){
+	    
+		   var num1=(Number)(answer.substring(0,index));//[0,index)，得出来的是字符串，将其改为数字
+		     
+		   var num2=(Number)(answer.substring(index+1));
+		   result=num1+"*"+num2+"="+(num1*num2);
+		 }
+		  else if((index=answer.indexOf("/"))!=-1){
+	
+		   var num1=(Number)(answer.substring(0,index));//[0,index)，得出来的是字符串，将其改为数字
+		     
+		   var num2=(Number)(answer.substring(index+1));
+		   result=num1+"/"+num2+"="+(num1/num2);
+		 }
+		  var obj=document.getElementById("a");//获得p标签的对象，对p标签进行修改
+		   var s=obj.innerHTML;
+		  obj.innerHTML=s.substring(0,4)+result;//在后面显示结果	   	 
+     }
+</script>
+</head>
+
+<body>
+<input type="button" onClick="dis_prompt()"  value="弹出对话框计算"><!--onclick是点击按钮，调用script里的方法-->
+<p id="a">结果是:</p>
+</body>
+</html>

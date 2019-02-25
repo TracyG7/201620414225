@@ -1,0 +1,971 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	
+<title>无标题文档</title>
+	<style type="text/css">
+		/*img{border-radius: 100%;
+		    width: 100px;
+			height: 100px;
+			overflow: hidden;
+		}*/
+		.main{
+			margin: 0 auto;
+			width: 1000px;
+		}
+		.left{
+			margin-right: 50px;
+			width: 200px;
+			height: 700px;
+			background-color:moccasin;
+			float: left;
+			text-align: center;
+		}
+		.leftimg{
+			   width: 100px;
+			   height: 100px;
+			   border-radius: 100%;/*图片变圆*/
+	
+			  
+		}
+		.text{
+		
+			width: 450px;
+			height: 25px;
+			line-height: 20px;
+			border:1px red solid ;
+		
+			vertical-align:middle;/*是搜索栏和图片持平*/
+		}
+		.button{
+			position: relative;
+			width: 50px;
+			right: 0;
+			border-radius: 0;
+			height: 50px;
+			line-height: 50px;
+			vertical-align:middle;/*是搜索栏和图片持平*/
+		}
+		.right{
+			
+			float:left;
+		}
+		.form{
+			   
+               height: 600px;
+			   
+			   
+		}
+		.shop{
+			width: 50px;
+			   height: 50px;
+			   border-radius: 100%;/*图片变圆*/
+		}
+		.footer{
+			width: 600px;
+			height: 60px;
+			line-height: 60px;
+			background-color:yellowgreen;
+			text-align: center;
+		}
+		.table{
+			margin-top: 20px;
+			 left: 1px;
+			top:30px;
+			z-index: 3;
+		}
+		table{
+			 width: 600px;
+		}
+		th{
+			background-color: chartreuse;
+			color: red;
+		}
+		table,tr,td,th{
+			border: 1px  black solid;
+			border-collapse: collapse;
+			text-align: center;
+			padding: 5px;
+		}
+		.change{
+			cursor:pointer;
+		}
+		.change:hover{
+			 color: blue;
+		}
+		#pagecount{
+			height:50px;
+			position: relative;
+		     line-height: 50px;
+			text-align: center;
+			z-index: 1;
+			
+		}
+		#pagecount1{
+			height:50px;
+			position: relative;
+		     line-height: 50px;
+			text-align: center;
+			z-index: 1;
+			
+		}
+		#pagecount2{
+			height:50px;
+			position: relative;
+		     line-height: 50px;
+			text-align: center;
+			z-index: 1;
+			
+		}
+		#button{
+			height:50px;
+			position: relative;
+		     line-height: 50px;
+			text-align: center;
+			z-index: 2;
+		}
+		#button input{
+			font-size: 20px;
+			margin-right: 50px;
+		}
+		#alter{
+			height:305px;
+			 width: 500px;
+		     line-height: 50px;
+			text-align: center;
+			background-image: url(background.jpg);
+			color: red;
+			font-weight: bolder;
+			
+		}
+		#alter input[type="button"]{
+			 font-size: 20px;
+			margin-right: 50px;
+		}
+		a:link{
+			color: #112B7F;
+			font-weight: bold;
+		}
+		a:visited{
+			color: #112B7F;
+			font-weight: bold;
+		}
+		#down{
+			cursor:pointer;
+		}
+		#down:hover{
+			 color: blue;
+		}
+		#add{
+			cursor:pointer;
+		}
+		#add:hover{
+			 color: blue;
+		}
+		
+		
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>-->
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript">
+		
+		 var curPage=1;
+	     var username;
+		var total,pageSize,totalPage;
+		var array=new Array();
+		var schoolsno;
+	 $(function(){
+		$.ajax({
+			 url:"resign.php",
+			 type:"POST",
+			 data:{t:5},
+			   async:false,//同步：意思是当有返回值以后才会进行后面的js程序。
+			success:function(result){
+				alert(result);
+				 if(result==0){
+					 
+					window.location.href="first.html";
+				 
+				 }
+				else{
+					username=result;
+					 getData(1);
+					$("#Susername").text("用户名："+result);
+					findpicture();
+				}
+			}
+			 
+		});
+		
+	 });
+		 function findpicture(){
+			url="http://201620414225-webload.stor.sinaapp.com/username"+username+".jpg";
+			 $.ajax({
+				 type:"GET",
+				 
+				 url:url,
+				  data:"",
+				 success:function(data){
+					 
+						 
+						 $("#findimg").attr("src",url);
+					 
+				 },
+				
+						  error:function(){
+							  $("#findimg").attr("src","头像.jpg");
+						  }
+		
+					
+			 });
+						 
+					 }
+				 
+			
+		
+		function updatepassword(){
+			   $("#buy").hide();
+			$("#search").hide();
+			   $("#alter").show();
+			$("#ss").hide();
+			
+		}
+		function mainpage(){
+			$("#showtable").hide();
+			$("#ss").hide();
+			   $("#buy").show();
+			$("#search").show();
+			$("#alter").hide();
+			$("#table").show();
+			getData(1);
+			
+		}
+		function getData(page){
+			//alert("用户名"+username);
+            $.ajax({
+				type:"POST",
+				url:"show.php",
+				dataType:"json",
+				async:false, 
+				data:{pageNum:page-1,username:username},
+				success:function(result){
+					$("#Schoolname").text("学校："+result.schoolname);
+					$("#friendlink").text("友情链接："+result.schoolname);
+					//alert(result.schoollink);
+					$("#friendlink").attr("href",result.schoollink);
+					$("#table tr:not(:first):not(:last)").empty("");
+					total=result.total;
+					pageSize=result.pageSize;
+					curPage=page;
+					totalPage=result.totalPage;
+					var li="";
+					var list=result.list;
+					 $("#table tr:not(:first)").remove();
+				 var table=$("#table");
+				 var i=1;
+				 schoolsno=result.schoolsno;
+				 for (var row of list){					
+					 var tr=$("<tr></tr>").appendTo(table);
+					  $("<td></td>").appendTo(tr).html(i++);
+					 $("<td></td>").appendTo(tr).html(row["ISBN"]);
+					 $("<td></td>").appendTo(tr).html(row["bookname"]);
+					 $("<td></td>").appendTo(tr).html("￥"+row["price"]);
+					 a=$("<td><input name='choosebook' type='checkbox'  value="+row["ISBN"]+"   ></td>").appendTo(tr);
+				 }
+				
+				},
+				complete:function(){
+					getPageBar();
+					$("#pagecount").on('click','span a',function(){
+        var rel = $(this).attr("rel");
+						
+        if(rel){
+            getData(rel);
+		
+        }
+		});
+				},
+				error:function(){
+					alert("失败");
+				}
+				
+			});
+            }
+		function getPageBar(){  
+//页码大于最大页数  
+			$("#pagecount2").hide();  
+			$("#pagecount1").hide();  
+			$("#pagecount").show();  
+if(curPage>totalPage) curPage=totalPage;  
+//页码小于1  
+if(curPage<1) curPage=1;  
+pageStr = "<span>共"+total+"条  </span><span>"+curPage+"/"+totalPage+"</span>";  
+  
+//如果是第一页  
+if(curPage==1){  
+pageStr += "<span>首页</span><span>上一页  </span>";  
+}else{  
+pageStr += "<span><a href='#'   rel='1'>首页  </a></span><span><a href='#'  rel='"+(curPage-1)+"'>上一页  </a></span>";  
+}  
+  
+//如果是最后页  
+if(curPage>=totalPage){  
+pageStr += "<span>下一页  </span><span>尾页  </span>";  
+}else{  
+pageStr += "<span><a href='#' rel='"+(parseInt(curPage)+1)+"'>下一页  </a></span><span><a href='#' rel='"+totalPage+"'>尾页  </a></span>";  
+}
+			
+			
+				 $("#button").show();
+button="<input type='button' id='all' value='全选' onclick='choose()' ><input type='reset'  value='取消所选'> <input type ='button'  onclick='add()'  value='加入购物车'>";
+		$("#button").html(button);
+				
+			$("#pagecount").html(pageStr);
+		
+
+
+		}
+		
+			function getPageBar1(){  
+//页码大于最大页数  
+			$("#pagecount2").hide();  
+			$("#pagecount").hide();  
+			$("#pagecount1").show();  
+if(curPage>totalPage) curPage=totalPage;  
+//页码小于1  
+if(curPage<1) curPage=1;  
+pageStr = "<span>共"+total+"条  </span><span>"+curPage+"/"+totalPage+"</span>";  
+  
+//如果是第一页  
+if(curPage==1){  
+pageStr += "<span>首页</span><span>上一页  </span>";  
+}else{  
+pageStr += "<span><a href='#'   rel='1'>首页  </a></span><span><a href='#'  rel='"+(curPage-1)+"'>上一页  </a></span>";  
+}  
+  
+//如果是最后页  
+if(curPage>=totalPage){  
+pageStr += "<span>下一页  </span><span>尾页  </span>";  
+}else{  
+pageStr += "<span><a href='#' rel='"+(parseInt(curPage)+1)+"'>下一页  </a></span><span><a href='#' rel='"+totalPage+"'>尾页  </a></span>";  
+}
+			
+			
+				 $("#button").show();
+button="<input type='button' id='all' value='全选' onclick='cchoose()' ><input type='button' onclick='rreset()'  value='取消所选'> <input type='button'  onclick='cclear()'  value='清空购物车'> <input type ='button'  onclick='buyresult()'  value='结算'>";
+		$("#button").html(button);
+				
+			$("#pagecount1").html(pageStr);
+
+
+
+		}
+		
+					function getPageBar2(){  
+//页码大于最大页数  
+			$("#pagecount1").hide();  
+			$("#pagecount").hide();  
+			$("#pagecount2").show();  
+if(curPage>totalPage) curPage=totalPage;  
+//页码小于1  
+if(curPage<1) curPage=1;  
+pageStr = "<span>共"+total+"条  </span><span>"+curPage+"/"+totalPage+"</span>";  
+  
+//如果是第一页  
+if(curPage==1){  
+pageStr += "<span>首页</span><span>上一页  </span>";  
+}else{  
+pageStr += "<span><a href='#'   rel='1'>首页  </a></span><span><a href='#'  rel='"+(curPage-1)+"'>上一页  </a></span>";  
+}  
+  
+//如果是最后页  
+if(curPage>=totalPage){  
+pageStr += "<span>下一页  </span><span>尾页  </span>";  
+}else{  
+pageStr += "<span><a href='#' rel='"+(parseInt(curPage)+1)+"'>下一页  </a></span><span><a href='#' rel='"+totalPage+"'>尾页  </a></span>";  
+}
+			
+			
+				 $("#button").hide();
+
+				
+			$("#pagecount2").html(pageStr);
+
+
+
+		}
+		
+		
+		
+		function choose(){
+			  var allCheck=document.getElementsByName("choosebook");
+			  for(var i=0;i<allCheck.length;i++){
+//设置复选框的选中状态
+allCheck[i].checked=true;
+			  }
+		}
+		function rreset(){//不能用reset
+			  var allCheck=document.getElementsByName("cchoosebook");
+			  for(var i=0;i<allCheck.length;i++){
+//设置复选框的选中状态
+allCheck[i].checked=false;
+			  }
+			 
+		}
+			function cchoose(){
+			  var allCheck=document.getElementsByName("cchoosebook");
+			  for(var i=0;i<allCheck.length;i++){
+//设置复选框的选中状态
+allCheck[i].checked=true;//
+			  }
+		}
+		function cclear(){//不能用clear
+			var allCheck=document.getElementsByName("cchoosebook");
+			var aa=0;
+					  for(var i=0;i<allCheck.length;i++){
+                                  //设置复选框的选中状态
+							  if(allCheck[i].checked==true){
+							
+								 //aa++;
+								  aa=aa+1;
+							  }
+                        
+			  }
+			for(var i=0;i<aa;i++){//不能完全删除
+					           array.pop();
+					
+					}
+			
+				 $("#ss tr:not(:first)").remove();
+			$("#button").hide();
+			$("#pagecount1").hide();
+		}
+		
+		
+		function add(){
+			var allCheck=document.getElementsByName("choosebook");
+			var aa=0;
+					  for(var i=0;i<allCheck.length;i++){
+                                  //设置复选框的选中状态
+							  if(allCheck[i].checked==true){
+								  array.push(allCheck[i].value);
+								  allCheck[i].checked=false;
+								 //aa++;
+								  aa=aa+1;
+							  }
+                        
+			  }
+		    
+				
+			/*$.ajax({
+				 url:"shop.php",
+				 data:{array:array,username:username},
+				 type:"POST",
+				 success:function(result){
+					 alert("你购买的书所需要的总花费是"+result+"元");
+					 alert(array.length);
+					for(var i=0;i<aa;i++){//不能完全删除
+					           array.pop();
+					
+					}
+					  alert(array.length);
+					 //清除数据
+                     getData(1);//更新   
+			  }//这方法是jquery，因此不能有javascript的方法
+		    
+				 });*/
+			
+			
+			
+		}
+		
+	function SearchData(page,search){
+			
+            $.ajax({
+				type:"POST",
+				url:"show.php",
+				dataType:"json",
+				async:false, 
+				data:{pageNum:page-1,search:search,s:1,schoolsno:schoolsno},
+				success:function(result){
+					$("#table tr:not(:first):not(:last)").empty("");
+					total=result.total;
+					pageSize=result.pageSize;
+					curPage=page;
+					totalPage=result.totalPage;
+					var li="";
+					var list=result.list;
+					 $("#table tr:not(:first)").remove();
+				 var table=$("#table");
+				 var i=1;
+					
+				 for (var row of list){					
+					 var tr=$("<tr></tr>").appendTo(table);
+					  $("<td></td>").appendTo(tr).html(i++);
+					 $("<td></td>").appendTo(tr).html(row["ISBN"]);
+					 $("<td></td>").appendTo(tr).html(row["bookname"]);
+					 $("<td></td>").appendTo(tr).html("￥"+row["price"]);
+					 $("<td><input name='choosebook' type='checkbox'  value="+row["ISBN"]+"   ></td>").appendTo(tr);
+				 }
+					$("#searchbook").val("");
+				
+				},
+				complete:function(){
+					getPageBar();
+					$("#pagecount").on('click','span a',function(){
+        var rel = $(this).attr("rel");
+        if(rel){
+            SearchData(rel,search);
+		
+        }
+		});
+				},
+				error:function(){
+					alert("失败");
+				}
+				
+				
+			});
+            }
+		
+		function search(){
+			var search=$("#searchbook").val();
+			SearchData(1,search);
+		}
+		function deletep(){
+			$("#firstpassword").val("");
+			$("#secondpassword").val("");
+		}
+		function submitp(){
+			
+			if($("#firstpassword").val()==$("#secondpassword").val()){
+				var password=$("#firstpassword").val();
+				$.ajax({
+					url:"alertpassword.php",
+					type:"POST",
+					data:{username:username,password:$("#firstpassword").val()},
+					success:function(result){
+						  alert("修改成功");
+			 				$("#firstpassword").val("");
+			          $("#secondpassword").val("");
+					}
+				});
+				
+				
+			}
+			else{
+				alert("修改密码失败，请重新输入");
+					$("#firstpassword").val("");
+			$("#secondpassword").val("");
+			}
+		}
+		
+		
+		
+		function shopcar(){
+			$("#buy").show();
+			$("#search").hide();
+			$("#alter").hide();
+			$("#showtable").hide();
+			$("#ss").hide();
+			shopshop(1);
+		}
+		function sshop(){
+			$("#buy").show();
+			$("#search").hide();
+			$("#alter").hide();
+			$("#showtable").hide();
+			$("#ss").hide();
+			ss(1);
+		}
+		
+		
+		
+		
+		
+		function shopshop(page){
+			
+			
+			 $.ajax({
+				type:"POST",
+				url:"showshop.php",
+				dataType:"json",
+				 async:false, 
+				data:{pageNum:page-1,username:username},
+				success:function(result){
+				     $("#table").hide();
+					$("#showtable").show();
+					$("#showtable tr:not(:first):not(:last)").empty("");
+					total=result.total;
+					pageSize=result.pageSize;
+					curPage=page;
+					totalPage=result.totalPage;
+					
+					var li="";
+					var list=result.list;
+					 $("#showtable tr:not(:first)").remove();
+				 var table=$("#showtable");
+				 var i=1;
+					
+				 for (var row of list){
+					 
+					 var tr=$("<tr></tr>").appendTo(table);
+					  $("<td></td>").appendTo(tr).html(i++);
+					 $("<td></td>").appendTo(tr).html(row["ISBN"]);
+					 $("<td></td>").appendTo(tr).html(row["bookname"]);
+					 $("<td></td>").appendTo(tr).html("￥"+row["price"]);
+					 $("<td></td>").appendTo(tr).html(row["time"]);
+					 $("<td></td>").appendTo(tr).html(row["booknumber"]);
+					
+				 }
+				 $("#searchbook").val("");//清空
+				},
+				complete:function(){
+					getPageBar2();
+					$("#pagecount2").on('click','span a',function(){
+        var rel = $(this).attr("rel");
+        if(rel){
+            shopshop(rel);
+		
+        }
+		});
+				},
+				error:function(){
+					alert("失败");
+				}
+			});
+			
+		}
+		function ss(page){
+			var a=0;
+			
+			 $.ajax({
+				type:"POST",
+				url:"ss.php",
+				dataType:"json",
+				 async:false, 
+				data:{pageNum:page-1,username:username,array:array},
+				success:function(result){
+				     $("#table").hide();
+						$("#ss").show();
+					$("#ss tr:not(:first)").empty("");
+					
+					total=result.total;
+					pageSize=result.pageSize;
+					curPage=page;
+					totalPage=result.totalPage;
+					alert(total);
+					var li="";
+					var list=result.list;
+					 $("ss tr:not(:first)").remove();
+					
+				 var table=$("#ss");
+				 var i=1;
+				
+					
+				 for (var row of list){
+					 a=a+1;
+					 var tr=$("<tr></tr>").appendTo(table);
+					  $("<td></td>").appendTo(tr).html(i++);
+					 $("<td></td>").appendTo(tr).html(row["ISBN"]);
+					 $("<td></td>").appendTo(tr).html(row["bookname"]);
+					 $("<td></td>").appendTo(tr).html("￥"+row["price"]);
+					$("<td><span id='down' style='font-size:25px' onclick='down(this)'>-</span><input  type='text' style='width:30px;text-align:center' value='1'><span id='add' style='font-size:15px' onclick='addnumber(this)'>+</span></td>").appendTo(tr);
+					$("<td><input name='cchoosebook'    type='checkbox'  checked='true'  value="+row["ISBN"]+" id="+row["ISBN"]+"  ></td>").appendTo(tr);
+				 }
+				 //$("#searchbook").val("");//清空
+				
+				
+				},
+				complete:function(){
+					if(a==0){
+						
+						$("#button1").hide();
+			$("#pagecount1").hide();
+				
+					}
+					else{
+					getPageBar1();
+					$("#pagecount1").on('click','span a',function(){
+        var rel = $(this).attr("rel");
+        if(rel){
+            ss(rel);
+		
+        }
+		});}
+				},
+				 error:function(){
+					alert("失败");
+					  $("#table").hide();
+						$("#ss").show();
+					$("#ss tr:not(:first):not(:last)").empty("");
+					 $("ss tr:not(:first)").remove();
+					 			$("#button").hide();//
+			$("#pagecount").hide();
+					 			 			$("#button2").hide();
+			$("#pagecount2").hide();
+				}
+				
+			});
+			
+		}
+		function buyresult(){
+			var a=new Array();
+			 var b=new Array();
+			 var buy=document.getElementsByName("cchoosebook");
+			 for(var i=0;i<buy.length;i++){
+				 if(buy[i].checked==true){
+					 a[i]=buy[i].value;
+			         c=document.getElementById(a[i]);
+					 b[i]=c.parentNode.previousElementSibling.lastElementChild.previousElementSibling.value;
+				 }
+				 }
+			 
+				 
+			 
+			$.ajax({
+				 url:"shop.php",
+				async:false,
+				 data:{a:a,b:b,username:username},
+				 type:"POST",
+				 success:function(result){
+					 alert("你购买的书所需要的总花费是"+result);
+					 $("#ss tr:not(:first)").empty("");
+					 $("ss tr:not(:first)").remove();
+				$("#button1").hide();	 
+					 $("#button2").hide();	
+			$("#pagecount1").hide();
+					 $("#button").hide();//
+
+			
+					 			 			
+		
+					
+                        
+			  }//这方法是jquery，因此不能有javascript的方法
+		    
+				 });
+			
+			
+		}
+		
+		function down(aa){
+			
+			
+			 if($(aa).next().val()=="1"){
+				 $(aa).next().val("1");
+			 }
+			else{
+				
+				i=parseInt($(aa).next().val())-1;
+				
+				 $(aa).next().val(i);
+			}
+			
+		}
+		function addnumber(aa){
+			ISBN=$(aa).parent().next().children().val();
+			alert(ISBN);
+			
+			i=parseInt($(aa).prev().val())+1;
+			alert(i);
+			      $.ajax({
+					  url:"findbooknumber.php",
+					  data:{ISBN:ISBN,schoolsno:schoolsno},
+					  async:false,
+					  type:"POST",
+					  success:function(result){
+						  //放回来的字符串
+                                    result=parseInt(result);
+						  alert(result);
+						   if(result>i){
+							    $(aa).prev().val(i);
+						   }
+						  else{
+							  $(aa).prev().val(result);
+						  }
+					  }
+				  });
+				
+			}
+			
+		
+		
+		
+		
+		
+		function updateimg(){
+			$("#win").window('open');
+		}
+	/*$("#ok").click(function(){
+			    $.ajax({
+					url:"img.php",
+					data:$('#formimg').serialize(),
+					type:"POST",
+					success:function(data){
+						alert(data);
+					}
+				});
+		});*/
+		function ok(){
+			var formData=new FormData();
+			formData.append('file',$("#file")[0].files[0]);
+			alert(formData);
+			
+			 $.ajax({
+					url:"img.php",
+					data:formData,//一定要双引号1111111
+					type:"POST",
+				    async:false,
+				 processData:false,
+				 contentType :false, 
+					success:function(result){
+						if(result==0){
+							alert("图像超过2MB或者上传的文件不是图像，请重新上传");
+						}
+						else{
+							alert("修改成功");
+							findpicture();//不能直接修改
+							//window.location.reload();
+						}
+					}
+			
+					 
+				
+		 
+				});
+		}
+		function changepic(fileDOM){
+		  if(window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    } 
+	
+			var file=fileDOM.files[0];
+					 var imageType = /^image\//;
+    //是否是图片
+    if(!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+			reader.onload=function(e){
+				 var img=document.getElementById("preview");
+				 img.src=e.target.result;
+			};
+			reader.readAsDataURL(file);
+			
+		}
+						
+	</script>
+</head>
+
+<body>
+	 <div id="win" class="easyui-window" title="更改图像" closed="true" style="width:400px;height:400px" >
+		<form  id="formimg" style="padding:10px 20px 10px 40px;"  enctype="multipart/form-data">
+			<p>上传图片 <input type="file" id="file" name="file" onChange="
+				changepic(this)"></p>
+			 <p>图片预览</p>
+			<img id="preview"  class="leftimg "  src="预览.jpg" alt="图片预览">
+			<div style="padding:10px;text-align:center;">
+			
+				<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="ok()">Ok</a>
+				<a href="#" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+			</div>
+		</form>
+	</div>
+  
+	
+		 <div class="main">
+		<div class="left">
+			<img  class="leftimg change" src="#" alt="" id="findimg" title="更改头像" onclick="updateimg()" >
+			<p  id="Susername">用户名</p>
+			<p id="Schoolname">学校名</p>
+			<p class="change" onclick="mainpage()">主页面</p>
+			<p class="change" onclick="updatepassword()"   >修改密码</p>
+			
+				<p><img   title="我的购物车"  class="change shop" onclick="sshop()"   src="购物车.jpg" alt=""></p>
+			<img   title="我的购物历史"  class="change shop" onclick="shopcar()"   src="历史.jpg" alt="">
+		
+		</div>
+	<div>
+		<div class="right">
+	<div>
+	  <form id="search">
+		<input   class="text" type="text" id="searchbook" placeholder="请输入要查找的ISBN或书名">
+		<span>
+		<img  class="button"  src="查询.jpg" alt="" onClick="search()">
+		</span>
+	</form>	
+	</div>
+	<div class="form" >
+	     <form class="table" id="form">
+			<div id="buy">
+		 <table id="table">
+		  <tr>
+			<th>序号</th>
+		   <th>ISBN</th>
+			<th>书名</th>
+			 <th>价格</th>
+			  <th>购买</th>
+		  </tr>	 
+		 </table>
+		<table id="showtable" style="display: none;">
+			<tr>
+			<th>序号</th>
+		   <th>ISBN</th>
+			<th>书名</th>
+			 <th>价格</th>
+			  <th>时间</th>
+				  <th>数量</th>
+		  </tr>		
+				
+		</table>
+		<table id="ss" style="display:none;">
+			<tr>
+			<th>序号</th>
+		   <th>ISBN</th>
+			<th>书名</th>
+			 <th>价格</th>
+			 
+				  <th>数量</th>
+				<th>购买</th>
+		  </tr>		
+				
+		</table>
+			 <div id="button" > </div>
+			 <div id="pagecount"></div>
+				<div id="pagecount1"></div>
+				<div id="pagecount2"></div>
+			</div>
+			 <div id="alter" style="display: none">
+				<p>
+				<lable for="alterpassword">修改密码：</lable> 
+				<input type="password"  autocomplete="off"   id="firstpassword">
+				</p>
+				 <p>
+				<lable for="alterpassword">再次确认修改密码：</lable> 
+				<input type="password"  autocomplete="off"   id="secondpassword">
+				</p>
+				<div class="password">
+					<input type="button" id="submitpassword"  onClick="submitp()"    value="确认修改">
+					<input type="button" id="deletepassword" onClick="deletep()"    value="取消"><!--id与函数名字不能一样，否则不能出效果-->
+				</div>
+			</div>
+		</form>
+		
+		
+   </div>
+			
+	<div class="footer">
+		<a  href="#"  id="friendlink"  >友情链接</a>
+     </div>
+		 </div>
+	</div>
+	</div>
+</body>
+</html>
